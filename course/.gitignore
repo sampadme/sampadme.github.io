@@ -12,7 +12,7 @@ npm-debug.log
 yarn-error.log
 .idea
 storage/*.key
-/public/uploads/main/file
+/public/uploads/main/file/
 /public/database-backup
 phpcs.xml
 modules_statuses.json
