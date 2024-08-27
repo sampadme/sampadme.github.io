@@ -1,5 +1,4 @@
-@extends('backend.master')
-@push('styles')
+<?php $__env->startPush('styles'); ?>
     <style>
         .select2-container--default .select2-selection--single {
             background-color: #fff;
@@ -89,42 +88,44 @@
             }
         }
     </style>
-@endpush
-@php
+<?php $__env->stopPush(); ?>
+<?php
     $table_name='courses';
-@endphp
-@section('table')
-    {{$table_name}}
-@stop
-@section('mainContent')
-    @php
+?>
+<?php $__env->startSection('table'); ?>
+    <?php echo e($table_name); ?>
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('mainContent'); ?>
+    <?php
         $required_type =false;
         if(isModuleActive('Org')){
             $required_type =true;
         }
-    @endphp
-    {!! generateBreadcrumb() !!}
+    ?>
+    <?php echo generateBreadcrumb(); ?>
+
     <section class="admin-visitor-area up_st_admin_visitor">
 
 
         <div class="white_box mb_30  student-details header-menu">
             <div class="white_box_tittle list_header">
-                <h4>{{__('common.Add New')}} {{__('quiz.Topic')}}</h4>
+                <h4><?php echo e(__('common.Add New')); ?> <?php echo e(__('quiz.Topic')); ?></h4>
             </div>
             <div class="col-lg-12">
 
 
-                <input type="hidden" id="url" value="{{url('/')}}">
+                <input type="hidden" id="url" value="<?php echo e(url('/')); ?>">
 
-                <form action="{{route('AdminSaveCourse')}}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <form action="<?php echo e(route('AdminSaveCourse')); ?>" method="POST" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
                     <div class="row">
-                        <div class="{{$required_type?'col-xl-4':'col-xl-6'}}  ">
+                        <div class="<?php echo e($required_type?'col-xl-4':'col-xl-6'); ?>  ">
                             <div class="primary_input ">
                                 <div class="row">
                                     <div class="col-md-12 ">
                                         <label class="primary_input_label"
-                                               for=""> {{__('courses.Type')}} <strong class="text-danger">*</strong>
+                                               for=""> <?php echo e(__('courses.Type')); ?> <strong class="text-danger">*</strong>
                                         </label>
                                     </div>
                                     <div class="col-md-4 col-sm-6 mb-25">
@@ -132,29 +133,31 @@
                                             <input type="radio" id="type1"
                                                    name="type"
                                                    value="1"
-                                                   @if(empty(old('type')))checked @else
-                                                {{old('type')==1?"checked":""}}
-                                                @endif>
-                                            <span class="checkmark me-2"></span>{{__('courses.Course')}}
+                                                   <?php if(empty(old('type'))): ?>checked <?php else: ?>
+                                                <?php echo e(old('type')==1?"checked":""); ?>
+
+                                                <?php endif; ?>>
+                                            <span class="checkmark me-2"></span><?php echo e(__('courses.Course')); ?>
+
                                         </label>
                                     </div>
                                     <div class="col-md-4 col-sm-6 mb-25">
                                         <label class="primary_checkbox d-flex mr-12">
                                             <input type="radio" id="type2"
                                                    name="type"
-                                                   value="2" {{old('type')==2?"checked":""}}>
-                                            <span class="checkmark me-2"></span> {{__('quiz.Quiz')}}</label>
+                                                   value="2" <?php echo e(old('type')==2?"checked":""); ?>>
+                                            <span class="checkmark me-2"></span> <?php echo e(__('quiz.Quiz')); ?></label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @if($required_type)
-                            <div class="{{$required_type?'col-xl-4':'col-xl-6'}} ">
+                        <?php if($required_type): ?>
+                            <div class="<?php echo e($required_type?'col-xl-4':'col-xl-6'); ?> ">
                                 <div class="primary_input ">
                                     <div class="row">
                                         <div class="col-md-12 ">
                                             <label class="primary_input_label"
-                                                   for=""> {{__('courses.Required Type')}} <strong
+                                                   for=""> <?php echo e(__('courses.Required Type')); ?> <strong
                                                     class="text-danger">*</strong> </label>
                                         </div>
                                         <div class="col-md-4  col-sm-6 mb-25">
@@ -163,7 +166,8 @@
                                                        name="required_type"
                                                        value="1"
                                                        checked>
-                                                <span class="checkmark me-2"></span>{{__('courses.Compulsory')}}
+                                                <span class="checkmark me-2"></span><?php echo e(__('courses.Compulsory')); ?>
+
                                             </label>
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-25">
@@ -171,23 +175,24 @@
                                                 <input type="radio"
                                                        name="required_type"
                                                        value="0">
-                                                <span class="checkmark me-2"></span> {{__('courses.Open')}}</label>
+                                                <span class="checkmark me-2"></span> <?php echo e(__('courses.Open')); ?></label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endif
-                        <div class=" {{$required_type?'col-xl-4':'col-xl-6'}} " id="dripCheck">
+                        <?php endif; ?>
+                        <div class=" <?php echo e($required_type?'col-xl-4':'col-xl-6'); ?> " id="dripCheck">
                             <div class="primary_input mb-25">
                                 <label class="primary_input_label mt-1"
-                                       for=""> {{__('common.Drip Content')}}</label>
+                                       for=""> <?php echo e(__('common.Drip Content')); ?></label>
                                 <div class="row">
                                     <div class="col-md-4 col-sm-6 mb-25">
                                         <label class="primary_checkbox d-flex mr-12">
                                             <input type="radio" class="drip0"
                                                    id="drip0" name="drip"
                                                    value="0" checked>
-                                            <span class="checkmark me-2"></span> {{__('common.No')}}
+                                            <span class="checkmark me-2"></span> <?php echo e(__('common.No')); ?>
+
                                         </label>
                                     </div>
                                     <div class="col-md-4 col-sm-6 mb-25">
@@ -195,82 +200,83 @@
                                             <input type="radio" class=" drip1"
                                                    id="drip1" name="drip"
                                                    value="1">
-                                            <span class="checkmark me-2"></span> {{__('common.Yes')}}</label>
+                                            <span class="checkmark me-2"></span> <?php echo e(__('common.Yes')); ?></label>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        @if(\Illuminate\Support\Facades\Auth::user()->role_id!=2)
+                        <?php if(\Illuminate\Support\Facades\Auth::user()->role_id!=2): ?>
                             <div class="col-xl-6">
                                 <div class="primary_input mb-25">
                                     <label class="primary_input_label"
-                                           for="assign_instructor">{{__('courses.Assign Instructor')}} </label>
+                                           for="assign_instructor"><?php echo e(__('courses.Assign Instructor')); ?> </label>
                                     <select class="primary_select category_id" name="assign_instructor"
-                                            id="assign_instructor" {{$errors->has('assign_instructor') ? 'autofocus' : ''}}>
-                                        <option data-display="{{__('common.Select')}} {{__('courses.Instructor')}}"
-                                                value="">{{__('common.Select')}} {{__('courses.Instructor')}} </option>
-                                        @foreach($instructors as $instructor)
-                                            <option value="{{$instructor->id}}">{{@$instructor->name}} </option>
-                                        @endforeach
+                                            id="assign_instructor" <?php echo e($errors->has('assign_instructor') ? 'autofocus' : ''); ?>>
+                                        <option data-display="<?php echo e(__('common.Select')); ?> <?php echo e(__('courses.Instructor')); ?>"
+                                                value=""><?php echo e(__('common.Select')); ?> <?php echo e(__('courses.Instructor')); ?> </option>
+                                        <?php $__currentLoopData = $instructors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $instructor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($instructor->id); ?>"><?php echo e(@$instructor->name); ?> </option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                 </div>
                             </div>
-                        @endif
+                        <?php endif; ?>
                         <!-- <div class="col-xl-6">
                             <div class="primary_input mb-25">
                                 <label class="primary_input_label"
-                                       for="assistant_instructors">{{__('courses.Assistant Instructor')}} </label>
+                                       for="assistant_instructors"><?php echo e(__('courses.Assistant Instructor')); ?> </label>
                                 <select name="assistant_instructors[]" id="assistant_instructors"
                                         class="multypol_check_select active mb-15 e1"
                                         multiple>
-                                    @foreach ($instructors as $instructor)
-                                        <option value="{{$instructor->id}}">{{@$instructor->name}} </option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $instructors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $instructor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($instructor->id); ?>"><?php echo e(@$instructor->name); ?> </option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                         </div> -->
 
                     </div>
-                    @php
+                    <?php
                         $LanguageList = getLanguageList();
-                    @endphp
+                    ?>
                     <div class="row pt-0">
-                        @if(isModuleActive('FrontendMultiLang'))
+                        <?php if(isModuleActive('FrontendMultiLang')): ?>
                             <ul class="nav nav-tabs no-bottom-border  mt-sm-md-20 mb-10 ms-3"
                                 role="tablist">
-                                @foreach ($LanguageList as $key => $language)
+                                <?php $__currentLoopData = $LanguageList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $language): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <li class="nav-item">
-                                        <a class="nav-link  @if (auth()->user()->language_code == $language->code) active @endif"
-                                           href="#element{{$language->code}}"
+                                        <a class="nav-link  <?php if(auth()->user()->language_code == $language->code): ?> active <?php endif; ?>"
+                                           href="#element<?php echo e($language->code); ?>"
                                            role="tab"
-                                           data-bs-toggle="tab">{{ $language->native }}  </a>
+                                           data-bs-toggle="tab"><?php echo e($language->native); ?>  </a>
                                     </li>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </ul>
-                        @endif
+                        <?php endif; ?>
                     </div>
                     <div class="tab-content">
-                        @foreach ($LanguageList as $key => $language)
+                        <?php $__currentLoopData = $LanguageList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $language): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div role="tabpanel"
-                                 class="tab-pane fade @if (auth()->user()->language_code == $language->code) show active @endif  "
-                                 id="element{{$language->code}}">
+                                 class="tab-pane fade <?php if(auth()->user()->language_code == $language->code): ?> show active <?php endif; ?>  "
+                                 id="element<?php echo e($language->code); ?>">
                                 <div class="row">
 
                                     <div
                                         class="col-xl-12">
                                         <div class="primary_input mb-25">
                                             <label class="primary_input_label d-flex"
-                                                   for="">{{__('quiz.Topic')}} {{__('common.Title')}} <span
+                                                   for=""><?php echo e(__('quiz.Topic')); ?> <?php echo e(__('common.Title')); ?> <span
                                                     class="required_mark">*</span>
-                                                @includeIf('aicontent::inc.button' , ['selected_template' => 1,'slug'=>'course-title'])
+                                                <?php if ($__env->exists('aicontent::inc.button' , ['selected_template' => 1,'slug'=>'course-title'])) echo $__env->make('aicontent::inc.button' , ['selected_template' => 1,'slug'=>'course-title'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                             </label>
 
-                                            <input class="primary_input_field" name="title[{{$language->code}}]"
+                                            <input class="primary_input_field" name="title[<?php echo e($language->code); ?>]"
                                                    placeholder="-"
                                                    id="addTitle"
-                                                   type="text" {{$errors->has('title') ? 'autofocus' : ''}}
-                                                   value="{{old('title.'.$language->code)}}">
+                                                   type="text" <?php echo e($errors->has('title') ? 'autofocus' : ''); ?>
+
+                                                   value="<?php echo e(old('title.'.$language->code)); ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -278,13 +284,14 @@
                                     <div class="col-xl-12">
                                         <div class="primary_input mb-35">
                                             <label class="primary_input_label d-flex"
-                                                   for="">{{__('courses.Course')}} {{__('courses.Requirements')}}
-                                                @includeIf('aicontent::inc.button' , ['selected_template' => 4,'slug'=>'course-requirements'])
+                                                   for=""><?php echo e(__('courses.Course')); ?> <?php echo e(__('courses.Requirements')); ?>
+
+                                                <?php if ($__env->exists('aicontent::inc.button' , ['selected_template' => 4,'slug'=>'course-requirements'])) echo $__env->make('aicontent::inc.button' , ['selected_template' => 4,'slug'=>'course-requirements'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                             </label>
                                             <textarea class="lms_summernote"
-                                                      name="requirements[{{$language->code}}]"
+                                                      name="requirements[<?php echo e($language->code); ?>]"
                                                       id="addRequirements" cols="30"
-                                                      rows="10">{!! old('requirements.'.$language->code) !!}</textarea>
+                                                      rows="10"><?php echo old('requirements.'.$language->code); ?></textarea>
                                         </div>
 
                                     </div>
@@ -294,13 +301,14 @@
                                     <div class="col-xl-12">
                                         <div class="primary_input mb-35">
                                             <label class="primary_input_label d-flex"
-                                                   for="">{{__('courses.Course')}} {{__('courses.Description')}}
-                                                @includeIf('aicontent::inc.button' , ['selected_template' => 3,'slug'=>'course-long-description'])
+                                                   for=""><?php echo e(__('courses.Course')); ?> <?php echo e(__('courses.Description')); ?>
+
+                                                <?php if ($__env->exists('aicontent::inc.button' , ['selected_template' => 3,'slug'=>'course-long-description'])) echo $__env->make('aicontent::inc.button' , ['selected_template' => 3,'slug'=>'course-long-description'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                             </label>
                                             <textarea class="lms_summernote"
-                                                      name="about[{{$language->code}}]" id="addAbout"
+                                                      name="about[<?php echo e($language->code); ?>]" id="addAbout"
                                                       cols="30"
-                                                      rows="10">{!! old('about.'.$language->code) !!}</textarea>
+                                                      rows="10"><?php echo old('about.'.$language->code); ?></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -308,22 +316,23 @@
                                     <div class="col-xl-12">
                                         <div class="primary_input mb-35">
                                             <label class="primary_input_label d-flex"
-                                                   for="">{{__('courses.Course')}} {{__('courses.Outcomes')}}
-                                                @includeIf('aicontent::inc.button' , ['selected_template' => 5,'slug'=>'course-outlines'])
+                                                   for=""><?php echo e(__('courses.Course')); ?> <?php echo e(__('courses.Outcomes')); ?>
+
+                                                <?php if ($__env->exists('aicontent::inc.button' , ['selected_template' => 5,'slug'=>'course-outlines'])) echo $__env->make('aicontent::inc.button' , ['selected_template' => 5,'slug'=>'course-outlines'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                             </label>
                                             <textarea class="lms_summernote"
-                                                      name="outcomes[{{$language->code}}]"
+                                                      name="outcomes[<?php echo e($language->code); ?>]"
                                                       id="addOutcomes"
                                                       cols="30"
-                                                      rows="10">{!! old('outcomes.'.$language->code) !!}</textarea>
+                                                      rows="10"><?php echo old('outcomes.'.$language->code); ?></textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
 
-                    @php
+                    <?php
                         if (courseSetting()->show_mode_of_delivery == 1 || isModuleActive('Org')) {
                             $col_size = 4;
                         } elseif (currentTheme()=='tvt'){
@@ -331,148 +340,153 @@
                         }else {
                             $col_size = 6;
                         }
-                    @endphp
+                    ?>
                     <div class="row">
 
-                        @if(currentTheme()=='tvt')
-                            <div class="col-xl-{{$col_size}}  mb_30">
+                        <?php if(currentTheme()=='tvt'): ?>
+                            <div class="col-xl-<?php echo e($col_size); ?>  mb_30">
                                 <label class="primary_input_label d-flex"
-                                       for="">{{__('courses.School Subject')}}
+                                       for=""><?php echo e(__('courses.School Subject')); ?>
+
                                 </label>
                                 <select class="primary_select school_subject_id" name="school_subject_id"
-                                        id="school_subject_id" {{$errors->has('category') ? 'autofocus' : ''}}>
-                                    <option data-display="{{__('common.Select')}} {{__('courses.School Subject')}} *"
-                                            value="">{{__('common.Select')}} {{__('courses.School Subject')}} </option>
-                                    @foreach($subjects as $subject)
-                                        <option value="{{$subject->id}}">{{$subject->name}}</option>
-                                    @endforeach
+                                        id="school_subject_id" <?php echo e($errors->has('category') ? 'autofocus' : ''); ?>>
+                                    <option data-display="<?php echo e(__('common.Select')); ?> <?php echo e(__('courses.School Subject')); ?> *"
+                                            value=""><?php echo e(__('common.Select')); ?> <?php echo e(__('courses.School Subject')); ?> </option>
+                                    <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($subject->id); ?>"><?php echo e($subject->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
-                        @endif
-                        <div class="col-xl-{{$col_size}} courseBox mb_30">
+                        <?php endif; ?>
+                        <div class="col-xl-<?php echo e($col_size); ?> courseBox mb_30">
                             <label class="primary_input_label d-flex"
-                                   for="">{{__('quiz.Category')}} <span
+                                   for=""><?php echo e(__('quiz.Category')); ?> <span
                                     class="required_mark">*</span>
                             </label>
                             <select class="primary_select category_id" name="category"
-                                    id="category_id" {{$errors->has('category') ? 'autofocus' : ''}}>
-                                <option data-display="{{__('common.Select')}} {{__('quiz.Category')}}"
-                                        value="">{{__('common.Select')}} {{__('quiz.Category')}} <span
+                                    id="category_id" <?php echo e($errors->has('category') ? 'autofocus' : ''); ?>>
+                                <option data-display="<?php echo e(__('common.Select')); ?> <?php echo e(__('quiz.Category')); ?>"
+                                        value=""><?php echo e(__('common.Select')); ?> <?php echo e(__('quiz.Category')); ?> <span
                                         class="required_mark">*</span></option>
-                                @foreach($categories as $category)
-                                    @if($category->parent_id==0)
-                                        @include('backend.categories._single_select_option',['category'=>$category,'level'=>1])
-                                    @endif
-                                @endforeach
+                                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($category->parent_id==0): ?>
+                                        <?php echo $__env->make('backend.categories._single_select_option',['category'=>$category,'level'=>1], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
-                        <div class="col-xl-{{$col_size}} courseBox mb_30" id="subCategoryDiv">
+                        <div class="col-xl-<?php echo e($col_size); ?> courseBox mb_30" id="subCategoryDiv">
                             <label class="primary_input_label d-flex"
-                                   for=""> {{ __('courses.Sub Category') }}
+                                   for=""> <?php echo e(__('courses.Sub Category')); ?>
+
                             </label>
                             <select class="primary_select" name="sub_category"
-                                    id="subcategory_id" {{$errors->has('sub_category') ? 'autofocus' : ''}}>
+                                    id="subcategory_id" <?php echo e($errors->has('sub_category') ? 'autofocus' : ''); ?>>
                                 <option
-                                    data-display="{{ __('common.Select') }} {{ __('courses.Sub Category') }}  "
-                                    value="">{{ __('common.Select') }} {{ __('courses.Sub Category') }}
+                                    data-display="<?php echo e(__('common.Select')); ?> <?php echo e(__('courses.Sub Category')); ?>  "
+                                    value=""><?php echo e(__('common.Select')); ?> <?php echo e(__('courses.Sub Category')); ?>
+
                                 </option>
                             </select>
                         </div>
 
-                        @if (courseSetting()->show_mode_of_delivery==1 || isModuleActive('Org'))
-                            <div class="col-xl-{{$col_size}}   mb_30">
+                        <?php if(courseSetting()->show_mode_of_delivery==1 || isModuleActive('Org')): ?>
+                            <div class="col-xl-<?php echo e($col_size); ?>   mb_30">
                                 <label class="primary_input_label d-flex"
-                                       for="">{{ __('courses.Mode of Delivery') }} <span class="required_mark">*</span>
+                                       for=""><?php echo e(__('courses.Mode of Delivery')); ?> <span class="required_mark">*</span>
                                 </label>
                                 <select class="primary_select mode_of_delivery " name="mode_of_delivery" required>
                                     <option
-                                        data-display="{{ __('common.Select') }} {{ __('courses.Mode of Delivery') }}*"
-                                        value="">{{ __('common.Select') }} {{ __('courses.Mode of Delivery') }}*
+                                        data-display="<?php echo e(__('common.Select')); ?> <?php echo e(__('courses.Mode of Delivery')); ?>*"
+                                        value=""><?php echo e(__('common.Select')); ?> <?php echo e(__('courses.Mode of Delivery')); ?>*
                                     </option>
-                                    <option value="1" selected>{{__('courses.Online')}}</option>
-                                    @if(!isModuleActive('Org'))
-                                        <option value="2">{{__('courses.Distance Learning')}}</option>
-                                        <option value="3">{{__('courses.Face-to-Face')}}</option>
-                                    @else
-                                        <option value="3">{{__('courses.Offline')}}</option>
-                                    @endif
+                                    <option value="1" selected><?php echo e(__('courses.Online')); ?></option>
+                                    <?php if(!isModuleActive('Org')): ?>
+                                        <option value="2"><?php echo e(__('courses.Distance Learning')); ?></option>
+                                        <option value="3"><?php echo e(__('courses.Face-to-Face')); ?></option>
+                                    <?php else: ?>
+                                        <option value="3"><?php echo e(__('courses.Offline')); ?></option>
+                                    <?php endif; ?>
 
                                 </select>
                             </div>
-                        @endif
+                        <?php endif; ?>
                         <div class="col-xl-4   quizBox" style="display: none">
                             <label class="primary_input_label d-flex"
-                                   for="">{{__('quiz.Quiz')}} <span class="required_mark">*</span>
+                                   for=""><?php echo e(__('quiz.Quiz')); ?> <span class="required_mark">*</span>
                             </label>
                             <select class="primary_select" name="quiz"
-                                    id="quiz_id" {{$errors->has('quiz') ? 'autofocus' : ''}}>
-                                <option data-display="{{__('common.Select')}} {{__('quiz.Quiz')}} "
-                                        value="">{{__('common.Select')}} {{__('quiz.Quiz')}} </option>
-                                @foreach($quizzes as $quiz)
-                                    <option value="{{$quiz->id}}">{{@$quiz->title}} </option>
-                                @endforeach
+                                    id="quiz_id" <?php echo e($errors->has('quiz') ? 'autofocus' : ''); ?>>
+                                <option data-display="<?php echo e(__('common.Select')); ?> <?php echo e(__('quiz.Quiz')); ?> "
+                                        value=""><?php echo e(__('common.Select')); ?> <?php echo e(__('quiz.Quiz')); ?> </option>
+                                <?php $__currentLoopData = $quizzes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $quiz): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($quiz->id); ?>"><?php echo e(@$quiz->title); ?> </option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
 
 
                         <!-- <div class="col-xl-4 makeResize ">
                             <label class="primary_input_label d-flex"
-                                   for="">{{ __('courses.Level') }}<span class="required_mark">*</span>
+                                   for=""><?php echo e(__('courses.Level')); ?><span class="required_mark">*</span>
                             </label>
                             <select class="primary_select" name="level">
                                 <option
-                                    data-display="{{ __('common.Select') }} {{ __('courses.Level') }}"
-                                    value="">{{ __('common.Select') }} {{ __('courses.Level') }}
+                                    data-display="<?php echo e(__('common.Select')); ?> <?php echo e(__('courses.Level')); ?>"
+                                    value=""><?php echo e(__('common.Select')); ?> <?php echo e(__('courses.Level')); ?>
+
                                 </option>
-                                @foreach($levels as $level)
+                                <?php $__currentLoopData = $levels; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $level): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <option
-                                        value="{{$level->id}}" {{old('level')==$level->id?"selected":""}} >{{$level->title}}</option>
-                                @endforeach
+                                        value="<?php echo e($level->id); ?>" <?php echo e(old('level')==$level->id?"selected":""); ?> ><?php echo e($level->title); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                             </select>
                         </div> -->
                         <div class="col-xl-4 makeResize responsiveResize" id="">
                             <label class="primary_input_label d-flex"
-                                   for="">{{ __('common.Language') }}<span class="required_mark">*</span>
+                                   for=""><?php echo e(__('common.Language')); ?><span class="required_mark">*</span>
                             </label>
                             <select class="primary_select mb-25" name="language"
-                                    id="" {{$errors->has('language') ? 'autofocus' : ''}}>
+                                    id="" <?php echo e($errors->has('language') ? 'autofocus' : ''); ?>>
                                 <option
-                                    data-display="{{ __('common.Select') }} {{ __('common.Language') }} *"
-                                    value="">{{ __('common.Select') }} {{ __('common.Language') }}</option>
-                                @foreach ($languages as $language)
+                                    data-display="<?php echo e(__('common.Select')); ?> <?php echo e(__('common.Language')); ?> *"
+                                    value=""><?php echo e(__('common.Select')); ?> <?php echo e(__('common.Language')); ?></option>
+                                <?php $__currentLoopData = $languages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $language): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <option
-                                        value="{{$language->id}}" {{old('language')==$language->id?"selected":""}} {{auth()->user()->language_id==$language->id?'selected':''}}>{{$language->native}}</option>
+                                        value="<?php echo e($language->id); ?>" <?php echo e(old('language')==$language->id?"selected":""); ?> <?php echo e(auth()->user()->language_id==$language->id?'selected':''); ?>><?php echo e($language->native); ?></option>
 
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                         <div class="col-xl-4 makeResize responsiveResize" id="durationBox">
                             <label class="primary_input_label d-flex"
-                                   for="">{{__('common.Duration')}} ({{__('common.In Minute')}})
+                                   for=""><?php echo e(__('common.Duration')); ?> (<?php echo e(__('common.In Minute')); ?>)
                             </label>
                             <div class="primary_input mb-25">
                                 <input class="primary_input_field" name="duration"
-                                       placeholder="{{__('common.Duration')}} ({{__('common.In Minute')}})"
+                                       placeholder="<?php echo e(__('common.Duration')); ?> (<?php echo e(__('common.In Minute')); ?>)"
                                        id="addDuration"
                                        min="0" step="any" type="number"
-                                       value="{{old('duration')}}" {{$errors->has('duration') ? 'autofocus' : ''}}>
+                                       value="<?php echo e(old('duration')); ?>" <?php echo e($errors->has('duration') ? 'autofocus' : ''); ?>>
                             </div>
                         </div>
-                        @if(isModuleActive('Org'))
+                        <?php if(isModuleActive('Org')): ?>
                             <div class="col-xl-4 makeResize responsiveResize" id="">
                                 <div class="primary_input mb-25">
                                     <label class="primary_input_label d-flex"
-                                           for="">{{__('org.Leaderboard point')}}
+                                           for=""><?php echo e(__('org.Leaderboard point')); ?>
+
                                     </label>
                                     <input class="primary_input_field" name="org_leaderboard_point"
-                                           placeholder="{{__('org.Leaderboard point')}}"
+                                           placeholder="<?php echo e(__('org.Leaderboard point')); ?>"
                                            id=""
                                            min="0" step="any" type="number"
-                                           value="{{old('org_leaderboard_point')}}" {{$errors->has('org_leaderboard_point') ? 'autofocus' : ''}}>
+                                           value="<?php echo e(old('org_leaderboard_point')); ?>" <?php echo e($errors->has('org_leaderboard_point') ? 'autofocus' : ''); ?>>
                                 </div>
                             </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
                     <div class="col-xl-6 courseBox">
                         <div class="primary_input mb-25">
@@ -480,21 +494,21 @@
                             <div class="row pt-2">
                                 <div class="col-md-6 mb-25">
                                     <label class="primary_input_label mt-1"
-                                           for=""> {{__('common.Complete course sequence')}}</label>
+                                           for=""> <?php echo e(__('common.Complete course sequence')); ?></label>
                                 </div>
                                 <div class="col-md-3 mb-25">
                                     <label class="primary_checkbox d-flex mr-12">
                                         <input type="radio" class="  complete_order0"
                                                id="complete_order0" name="complete_order"
                                                value="0" checked>
-                                        <span class="checkmark me-2"></span> {{__('common.No')}}</label>
+                                        <span class="checkmark me-2"></span> <?php echo e(__('common.No')); ?></label>
                                 </div>
                                 <div class="col-md-3 mb-25">
                                     <label class="primary_checkbox d-flex mr-12">
                                         <input type="radio" class="complete_order1"
                                                id="complete_order1" name="complete_order"
                                                value="1">
-                                        <span class="checkmark me-2"></span>{{__('common.Yes')}}</label>
+                                        <span class="checkmark me-2"></span><?php echo e(__('common.Yes')); ?></label>
                                 </div>
                             </div>
                         </div>
@@ -507,11 +521,11 @@
                                     <i class="slider round"></i>
                                 </label>
                                 <label
-                                    class="mb-0">{{ __('courses.This course is a top course') }}</label>
+                                    class="mb-0"><?php echo e(__('courses.This course is a top course')); ?></label>
                             </div>
                         </div>
                     </div>
-                    @if(showEcommerce())
+                    <?php if(showEcommerce()): ?>
                         <div class="row mt-20">
                             <div class="col-lg-4 mb-25">
                                 <div class="checkbox_wrap d-flex align-items-center mt-40">
@@ -520,16 +534,16 @@
                                         <i class="slider round"></i>
                                     </label>
                                     <label
-                                        class="mb-0">{{ __('courses.This course is a free course') }}</label>
+                                        class="mb-0"><?php echo e(__('courses.This course is a free course')); ?></label>
                                 </div>
                             </div>
                             <div class="col-xl-4" id="price_div">
                                 <div class="primary_input mb-25">
                                     <label class="primary_input_label"
-                                           for="">{{ __('courses.Price') }}</label>
+                                           for=""><?php echo e(__('courses.Price')); ?></label>
                                     <input class="primary_input_field" name="price" min="0" placeholder="-"
                                            id="addPrice"
-                                           type="number" value="{{old('price')}}">
+                                           type="number" value="<?php echo e(old('price')); ?>">
                                 </div>
                             </div>
                         </div>
@@ -541,16 +555,16 @@
                                         <i class="slider round"></i>
                                     </label>
                                     <label
-                                        class="mb-0">{{ __('courses.This course has discounted price') }}</label>
+                                        class="mb-0"><?php echo e(__('courses.This course has discounted price')); ?></label>
                                 </div>
                             </div>
                             <div class="col-xl-4" id="discount_price_div" style="display: none">
                                 <div class="primary_input mb-25">
                                     <label class="primary_input_label"
-                                           for="">{{ __('courses.Discount') }} {{ __('courses.Price') }}</label>
+                                           for=""><?php echo e(__('courses.Discount')); ?> <?php echo e(__('courses.Price')); ?></label>
                                     <input class="primary_input_field" min="0" name="discount_price" placeholder="-"
                                            id="addDiscount"
-                                           type="number" value="{{old('discount_price')}}">
+                                           type="number" value="<?php echo e(old('discount_price')); ?>">
                                 </div>
                             </div>
                         </div> -->
@@ -565,21 +579,21 @@
                                         <i class="slider round"></i>
                                     </label>
                                     <label
-                                        class="mb-0">{{ __('courses.This course is a In App purchase course') }}</label>
+                                        class="mb-0"><?php echo e(__('courses.This course is a In App purchase course')); ?></label>
                                 </div>
                             </div>
                             <div class="col-xl-6 d-none" id="iap_div">
                                 <div class="primary_input mb-25">
                                     <label class="primary_input_label"
-                                           for="">{{ __('courses.In App purchase product ID') }}</label>
+                                           for=""><?php echo e(__('courses.In App purchase product ID')); ?></label>
                                     <input class="primary_input_field" name="iap_product_id" placeholder="-"
                                            id=""
-                                           type="text" value="{{old('iap_product_id')}}">
+                                           type="text" value="<?php echo e(old('iap_product_id')); ?>">
                                 </div>
                             </div>
                         </div> -->
 
-                    @endif
+                    <?php endif; ?>
                     <!-- <div class="row mt-20 mb-10 videoOption">
                         <div class="col-lg-6">
                             <div class="checkbox_wrap d-flex align-items-center mt-40">
@@ -589,7 +603,7 @@
                                     <i class="slider round"></i>
                                 </label>
                                 <label
-                                    class="mb-0">{{ __('courses.Show Overview Video') }}</label>
+                                    class="mb-0"><?php echo e(__('courses.Show Overview Video')); ?></label>
                             </div>
                         </div>
                     </div> -->
@@ -599,26 +613,31 @@
                             <select class="primary_select category_id " name="host"
                                     id="">
                                 <option
-                                    data-display="{{__('courses.Course overview host')}} *"
-                                    value="">{{__('courses.Course overview host')}}
+                                    data-display="<?php echo e(__('courses.Course overview host')); ?> *"
+                                    value=""><?php echo e(__('courses.Course overview host')); ?>
+
                                 </option>
-                                <option data-display="{{__('courses.Image Preview')}}"
-                                        value="ImagePreview" {{@$course->host=="ImagePreview"?'selected':''}}>{{__('courses.Image Preview')}}
+                                <option data-display="<?php echo e(__('courses.Image Preview')); ?>"
+                                        value="ImagePreview" <?php echo e(@$course->host=="ImagePreview"?'selected':''); ?>><?php echo e(__('courses.Image Preview')); ?>
+
                                 </option>
 
-                                <option {{@$course->host=="Youtube"?'selected':''}} value="Youtube">
-                                    {{__('courses.Youtube')}}
+                                <option <?php echo e(@$course->host=="Youtube"?'selected':''); ?> value="Youtube">
+                                    <?php echo e(__('courses.Youtube')); ?>
+
                                 </option>
-                                <option value="VdoCipher" {{@$course->host=="VdoCipher"?'selected':''}}>
+                                <option value="VdoCipher" <?php echo e(@$course->host=="VdoCipher"?'selected':''); ?>>
                                     VdoCipher
                                 </option>
 
-                                <option value="Vimeo" {{@$course->host=="Vimeo"?'selected':''}}>
-                                    {{__('courses.Vimeo')}}
+                                <option value="Vimeo" <?php echo e(@$course->host=="Vimeo"?'selected':''); ?>>
+                                    <?php echo e(__('courses.Vimeo')); ?>
+
                                 </option>
 
-                                <option value="Self" {{@$course->host=="Self"?'selected':''}}>
-                                    {{__('courses.Self')}}
+                                <option value="Self" <?php echo e(@$course->host=="Self"?'selected':''); ?>>
+                                    <?php echo e(__('courses.Self')); ?>
+
                                 </option>
 
 
@@ -626,124 +645,136 @@
                         </div>
                         <div class="col-xl-8 ">
                             <div class="input-effect videoUrl"
-                                 style="display:@if((isset($course) && (@$course->host!="Youtube")) || !isset($course)) none  @endif">
-                                <label>{{__('courses.Video URL')}}
+                                 style="display:<?php if((isset($course) && (@$course->host!="Youtube")) || !isset($course)): ?> none  <?php endif; ?>">
+                                <label><?php echo e(__('courses.Video URL')); ?>
+
                                     <span class="required_mark">*</span></label>
                                 <input
                                     id=""
-                                    class="primary_input_field youtubeVideo name{{ $errors->has('trailer_link') ? ' is-invalid' : '' }}"
+                                    class="primary_input_field youtubeVideo name<?php echo e($errors->has('trailer_link') ? ' is-invalid' : ''); ?>"
                                     type="text" name="trailer_link"
-                                    placeholder="{{__('courses.Video URL')}}"
+                                    placeholder="<?php echo e(__('courses.Video URL')); ?>"
                                     autocomplete="off"
-                                    value="" {{$errors->has('trailer_link') ? 'autofocus' : ''}}>
+                                    value="" <?php echo e($errors->has('trailer_link') ? 'autofocus' : ''); ?>>
                                 <span class="focus-border"></span>
-                                @if ($errors->has('trailer_link'))
+                                <?php if($errors->has('trailer_link')): ?>
                                     <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('trailer_link') }}</strong>
+                                                <strong><?php echo e($errors->first('trailer_link')); ?></strong>
                                             </span>
-                                @endif
+                                <?php endif; ?>
                             </div>
 
                             <div class="row  vimeoUrl" id=""
-                                 style="display: @if((isset($course) && (@$course->host!="Vimeo")) || !isset($course)) none  @endif">
+                                 style="display: <?php if((isset($course) && (@$course->host!="Vimeo")) || !isset($course)): ?> none  <?php endif; ?>">
                                 <div class="col-lg-12" id="">
                                     <label class="primary_input_label"
-                                           for="">{{__('courses.Vimeo Video')}}</label>
+                                           for=""><?php echo e(__('courses.Vimeo Video')); ?></label>
 
 
-                                    @if(config('vimeo.connections.main.upload_type')=="Direct")
+                                    <?php if(config('vimeo.connections.main.upload_type')=="Direct"): ?>
                                         <div class="primary_file_uploader">
                                             <input class="primary-input filePlaceholder" type="text"
                                                    id=""
-                                                   {{$errors->has('image') ? 'autofocus' : ''}}
-                                                   placeholder="{{__('courses.Browse Video file')}}"
+                                                   <?php echo e($errors->has('image') ? 'autofocus' : ''); ?>
+
+                                                   placeholder="<?php echo e(__('courses.Browse Video file')); ?>"
                                                    readonly="">
                                             <button class="" type="button">
                                                 <label class="primary-btn small fix-gr-bg"
-                                                       for="document_file_thumb_vimeo_add">{{__('common.Browse') }}</label>
+                                                       for="document_file_thumb_vimeo_add"><?php echo e(__('common.Browse')); ?></label>
                                                 <input type="file" class="d-none fileUpload" name="vimeo"
                                                        id="document_file_thumb_vimeo_add">
                                             </button>
                                         </div>
-                                    @else
+                                    <?php else: ?>
                                         <select class="select2 vimeoVideo vimeoList "
                                                 name="vimeo"
                                                 id="">
                                             <option
-                                                data-display="{{__('common.Select')}} {{__('courses.Video')}}"
-                                                value="">{{__('common.Select')}} {{__('courses.Video')}}
+                                                data-display="<?php echo e(__('common.Select')); ?> <?php echo e(__('courses.Video')); ?>"
+                                                value=""><?php echo e(__('common.Select')); ?> <?php echo e(__('courses.Video')); ?>
+
                                             </option>
                                         </select>
-                                    @endif
-                                    @if ($errors->has('vimeo'))
+                                    <?php endif; ?>
+                                    <?php if($errors->has('vimeo')): ?>
                                         <span
                                             class="invalid-feedback invalid-select"
                                             role="alert">
-                                            <strong>{{ $errors->first('vimeo') }}</strong>
+                                            <strong><?php echo e($errors->first('vimeo')); ?></strong>
                                         </span>
-                                    @endif
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="row VdoCipherUrl"
-                                 style="display: @if((isset($course) && ($course->trailer_link!="VdoCipher")) || !isset($editLesson)) none  @endif">
+                                 style="display: <?php if((isset($course) && ($course->trailer_link!="VdoCipher")) || !isset($editLesson)): ?> none  <?php endif; ?>">
                                 <div class="input-effect " id=""
                                 >
                                     <div class="" id="">
                                         <label class="primary_input_label"
-                                               for="">{{__('courses.VdoCipher Video')}}</label>
+                                               for=""><?php echo e(__('courses.VdoCipher Video')); ?></label>
                                         <select class="select2 vdocipherList " name="vdocipher"
                                                 id="VdoCipherVideo">
                                             <option
-                                                data-display="{{__('common.Select')}} video "
-                                                value="">{{__('common.Select')}} video
+                                                data-display="<?php echo e(__('common.Select')); ?> video "
+                                                value=""><?php echo e(__('common.Select')); ?> video
                                             </option>
-                                            @foreach ($vdocipher_list as $vdo)
-                                                @if(isset($editLesson))
+                                            <?php $__currentLoopData = $vdocipher_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vdo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if(isset($editLesson)): ?>
                                                     <option
-                                                        value="{{@$vdo->id}}" {{$vdo->id==$editLesson->video_url?'selected':''}}>{{@$vdo->title}}</option>
-                                                @else
+                                                        value="<?php echo e(@$vdo->id); ?>" <?php echo e($vdo->id==$editLesson->video_url?'selected':''); ?>><?php echo e(@$vdo->title); ?></option>
+                                                <?php else: ?>
                                                     <option
-                                                        value="{{@$vdo->id}}">{{@$vdo->title}}</option>
-                                                @endif
+                                                        value="<?php echo e(@$vdo->id); ?>"><?php echo e(@$vdo->title); ?></option>
+                                                <?php endif; ?>
 
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
-                                        @if ($errors->has('vdocipher'))
+                                        <?php if($errors->has('vdocipher')): ?>
                                             <span class="invalid-feedback invalid-select"
                                                   role="alert">
-                                               <strong>{{ $errors->first('vdocipher') }}</strong>
+                                               <strong><?php echo e($errors->first('vdocipher')); ?></strong>
                                            </span>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row  videofileupload" id=""
-                                 style="display: @if((isset($course) && ((@$course->host=="Vimeo") ||  (@$course->host=="Youtube")) ) || !isset($course)) none  @endif">
+                                 style="display: <?php if((isset($course) && ((@$course->host=="Vimeo") ||  (@$course->host=="Youtube")) ) || !isset($course)): ?> none  <?php endif; ?>">
 
                                 <div class="col-xl-12">
-                                    {{--                                    <div class="primary_input">--}}
-                                    {{--                                        <label class="primary_input_label"--}}
-                                    {{--                                               for="">{{__('courses.Video File')}}</label>--}}
-                                    {{--                                        <div class="primary_file_uploader">--}}
-                                    {{--                                            <input type="file" class="filepond" name="file"--}}
-                                    {{--                                                   data-accepts="video/mp4,video/webm"--}}
-                                    {{--                                            >--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
 
-                                    <x-upload-file
-                                        name="file"
-                                        type="video"
-                                        {{--                                        media_id="{{isset($edit)?$edit->image_media?->media_id:''}}"--}}
-                                        label="{{ __('courses.Video File') }}"
-                                    />
+                                    <?php if (isset($component)) { $__componentOriginal71c6471fa76ce19017edc287b6f4508c = $component; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.upload-file','data' => ['name' => 'file','type' => 'video','label' => ''.e(__('courses.Video File')).'']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('upload-file'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['name' => 'file','type' => 'video','label' => ''.e(__('courses.Video File')).'']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal71c6471fa76ce19017edc287b6f4508c)): ?>
+<?php $component = $__componentOriginal71c6471fa76ce19017edc287b6f4508c; ?>
+<?php unset($__componentOriginal71c6471fa76ce19017edc287b6f4508c); ?>
+<?php endif; ?>
 
                                 </div>
                             </div>
                         </div>
                     </div>
-                    @if(isModuleActive("SupportTicket"))
+                    <?php if(isModuleActive("SupportTicket")): ?>
                         <div class="row mt-20 mb-10">
                             <div class="col-lg-6">
                                 <div class="checkbox_wrap d-flex align-items-center mt-40">
@@ -752,39 +783,40 @@
                                                class="support" id="support" value="1">
                                         <i class="slider round"></i>
                                     </label>
-                                    <label class="mb-0">{{ __('common.Support') }}</label>
+                                    <label class="mb-0"><?php echo e(__('common.Support')); ?></label>
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    <?php endif; ?>
 
-                    @if(isModuleActive('UpcomingCourse'))
+                    <?php if(isModuleActive('UpcomingCourse')): ?>
                         <div class="row mt-20">
                             <div class="col-lg-3 mb-25">
                                 <div class="checkbox_wrap d-flex align-items-center mt-40">
                                     <label for="is_upcoming_course" class="switch_toggle me-2">
-                                        <input {{ old('is_upcoming_course') == 1?'checked':'' }} type="checkbox"
+                                        <input <?php echo e(old('is_upcoming_course') == 1?'checked':''); ?> type="checkbox"
                                                id="is_upcoming_course" value="1" name="is_upcoming_course">
                                         <i class="slider round"></i>
                                     </label>
                                     <label
-                                        class="mb-0">{{ __('courses.Is upcoming course?') }}</label>
+                                        class="mb-0"><?php echo e(__('courses.Is upcoming course?')); ?></label>
                                 </div>
                             </div>
 
                             <div class="col-xl-3 upcoming_course_div publish_date_div">
                                 <div class="primary_input mb-15">
                                     <label class="primary_input_label"
-                                           for="">{{__('courses.Publish Date')}}
+                                           for=""><?php echo e(__('courses.Publish Date')); ?>
+
                                     </label>
                                     <div class="primary_datepicker_input">
                                         <div class="g-0  input-right-icon">
                                             <div class="col">
                                                 <div class="">
-                                                    <input placeholder="{{__('courses.Publish Date')}}"
+                                                    <input placeholder="<?php echo e(__('courses.Publish Date')); ?>"
                                                            class="primary_input_field primary-input date form-control"
                                                            id="publish_date" type="text" name="publish_date"
-                                                           value="{{ old('publish_date') }}"
+                                                           value="<?php echo e(old('publish_date')); ?>"
                                                            autocomplete="off">
                                                 </div>
                                             </div>
@@ -798,125 +830,140 @@
                             <div class="col-lg-3 mb-25 upcoming_course_div">
                                 <div class="checkbox_wrap d-flex align-items-center mt-40">
                                     <label for="is_allow_prebooking" class="switch_toggle me-2">
-                                        <input {{ old('is_allow_prebooking') == 1?'checked':'' }} type="checkbox"
+                                        <input <?php echo e(old('is_allow_prebooking') == 1?'checked':''); ?> type="checkbox"
                                                id="is_allow_prebooking" value="1" name="is_allow_prebooking">
                                         <i class="slider round"></i>
                                     </label>
                                     <label
-                                        class="mb-0">{{ __('courses.Is Allow Prebooking?') }}</label>
+                                        class="mb-0"><?php echo e(__('courses.Is Allow Prebooking?')); ?></label>
                                 </div>
                             </div>
 
                             <div class="col-lg-3 mb-25 upcoming_course_div booking_amount_div">
                                 <div class="primary_input mb-25">
                                     <label class="primary_input_label"
-                                           for="booking_amount">{{ __('courses.Booking Amount') }} <span
+                                           for="booking_amount"><?php echo e(__('courses.Booking Amount')); ?> <span
                                             class="required_mark">*</span></label>
                                     <input class="primary_input_field booking_amount_field" name="booking_amount"
-                                           placeholder="{{ __('courses.Booking Amount') }}"
+                                           placeholder="<?php echo e(__('courses.Booking Amount')); ?>"
                                            id="booking_amount"
                                            type="number"
-                                           value="{{old('booking_amount')}}">
+                                           value="<?php echo e(old('booking_amount')); ?>">
                                 </div>
                             </div>
 
                         </div>
-                    @endif
+                    <?php endif; ?>
 
                     <!-- <div class="row">
                         <div class="col-xl-4 mt-25">
-                            <label>{{__('courses.View Scope')}} </label>
+                            <label><?php echo e(__('courses.View Scope')); ?> </label>
                             <select class="primary_select " name="scope"
                                     id="">
                                 <option
-                                    value="1" {{@$course->scope=="1"?'selected':''}}>{{__('courses.Public')}}
+                                    value="1" <?php echo e(@$course->scope=="1"?'selected':''); ?>><?php echo e(__('courses.Public')); ?>
+
                                 </option>
 
-                                <option {{@$course->scope=="0"?'selected':''}} value="0">
-                                    {{__('courses.Private')}}
+                                <option <?php echo e(@$course->scope=="0"?'selected':''); ?> value="0">
+                                    <?php echo e(__('courses.Private')); ?>
+
                                 </option>
 
                             </select>
                         </div>
 
                         <div class="col-xl-4 mt-25">
-                            <label>{{_trans('courses.Access Limit')}} {{_trans('courses.In Days')}}
-                                (<small>{{_trans('courses.0 means Unlimited')}}</small> )</label>
+                            <label><?php echo e(_trans('courses.Access Limit')); ?> <?php echo e(_trans('courses.In Days')); ?>
+
+                                (<small><?php echo e(_trans('courses.0 means Unlimited')); ?></small> )</label>
                             <input class="primary_input_field " name="access_limit"
-                                   placeholder="{{_trans('courses.Access Limit')}}"
+                                   placeholder="<?php echo e(_trans('courses.Access Limit')); ?>"
                                    id="access_limit"
                                    type="number"
-                                   value="{{old('access_limit')}}">
+                                   value="<?php echo e(old('access_limit')); ?>">
                         </div>
                     </div> -->
                     <div class="row mt-20">
                         <div class="col-xl-6">
                             <div class=" mb-35">
-                                <x-upload-file
-                                    name="image"
-                                    type="image"
-                                    {{--                                    media_id="{{isset($edit)?$edit->image_media?->media_id:''}}"--}}
-                                    label="{{ __('courses.Course Thumbnail') }}"
-                                    note="{{__('student.Recommended size')}} (1170x600)"
-                                />
+                                <?php if (isset($component)) { $__componentOriginal71c6471fa76ce19017edc287b6f4508c = $component; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.upload-file','data' => ['name' => 'image','type' => 'image','label' => ''.e(__('courses.Course Thumbnail')).'','note' => ''.e(__('student.Recommended size')).' (1170x600)']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('upload-file'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['name' => 'image','type' => 'image','label' => ''.e(__('courses.Course Thumbnail')).'','note' => ''.e(__('student.Recommended size')).' (1170x600)']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal71c6471fa76ce19017edc287b6f4508c)): ?>
+<?php $component = $__componentOriginal71c6471fa76ce19017edc287b6f4508c; ?>
+<?php unset($__componentOriginal71c6471fa76ce19017edc287b6f4508c); ?>
+<?php endif; ?>
 
                             </div>
                         </div>
-                        @if(\Illuminate\Support\Facades\Auth::user()->subscription_api_status==1)
+                        <?php if(\Illuminate\Support\Facades\Auth::user()->subscription_api_status==1): ?>
                             <div class="col-xl-6">
                                 <label class="primary_input_label"
-                                       for="">{{__('newsletter.Subscription List')}}
+                                       for=""><?php echo e(__('newsletter.Subscription List')); ?>
+
                                 </label>
                                 <select class="primary_select"
-                                        name="subscription_list" {{$errors->has('subscription_list') ? 'autofocus' : ''}}>
+                                        name="subscription_list" <?php echo e($errors->has('subscription_list') ? 'autofocus' : ''); ?>>
                                     <option
-                                        data-display="{{__('common.Select')}} {{__('newsletter.Subscription List')}}"
-                                        value="">{{__('common.Select')}} {{__('newsletter.Subscription List')}}
+                                        data-display="<?php echo e(__('common.Select')); ?> <?php echo e(__('newsletter.Subscription List')); ?>"
+                                        value=""><?php echo e(__('common.Select')); ?> <?php echo e(__('newsletter.Subscription List')); ?>
+
 
                                     </option>
-                                    @foreach($sub_lists as $list)
-                                        <option value="{{$list['id']}}">
-                                            {{$list['name']}}
+                                    <?php $__currentLoopData = $sub_lists; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($list['id']); ?>">
+                                            <?php echo e($list['name']); ?>
+
                                         </option>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                 </select>
                             </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
 
-                    @if(Settings('frontend_active_theme')=="edume")
+                    <?php if(Settings('frontend_active_theme')=="edume"): ?>
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="primary_input mb-25">
                                     <label class="primary_input_label"
-                                           for="">{{__('courses.Key Point') }} (1)</label>
+                                           for=""><?php echo e(__('courses.Key Point')); ?> (1)</label>
                                     <input class="primary_input_field" name="what_learn1" placeholder="-"
-                                           type="text" value="{{old('what_learn1')}}">
+                                           type="text" value="<?php echo e(old('what_learn1')); ?>">
                                 </div>
                             </div>
 
                             <div class="col-xl-6">
                                 <div class="primary_input mb-25">
                                     <label class="primary_input_label"
-                                           for="">{{__('courses.Key Point') }} (2) </label>
+                                           for=""><?php echo e(__('courses.Key Point')); ?> (2) </label>
                                     <input class="primary_input_field" name="what_learn2" placeholder="-"
-                                           type="text" value="{{old('what_learn2')}}">
+                                           type="text" value="<?php echo e(old('what_learn2')); ?>">
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    <?php endif; ?>
                     <!-- <div class="row">
 
                         <div class="col-xl-12">
                             <div class="primary_input mb-25">
                                 <label class="primary_input_label d-flex"
-                                       for="">{{__('courses.Meta keywords') }}
-                                    @includeIf('aicontent::inc.button' , ['selected_template' => 6,'slug'=>'course-meta-keywords'])
+                                       for=""><?php echo e(__('courses.Meta keywords')); ?>
+
+                                    <?php if ($__env->exists('aicontent::inc.button' , ['selected_template' => 6,'slug'=>'course-meta-keywords'])) echo $__env->make('aicontent::inc.button' , ['selected_template' => 6,'slug'=>'course-meta-keywords'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 </label>
                                 <input class="primary_input_field" name="meta_keywords" placeholder="-"
                                        id="addMeta"
-                                       type="text" value="{{old('meta_keywords')}}">
+                                       type="text" value="<?php echo e(old('meta_keywords')); ?>">
                             </div>
                         </div>
 
@@ -926,12 +973,13 @@
                         <div class="col-xl-12">
                             <div class="primary_input mb-25">
                                 <label class="primary_input_label d-flex"
-                                       for="">{{__('courses.Meta description') }}
-                                    @includeIf('aicontent::inc.button' , ['selected_template' =>7,'slug'=>'course-meta-description'])
+                                       for=""><?php echo e(__('courses.Meta description')); ?>
+
+                                    <?php if ($__env->exists('aicontent::inc.button' , ['selected_template' =>7,'slug'=>'course-meta-description'])) echo $__env->make('aicontent::inc.button' , ['selected_template' =>7,'slug'=>'course-meta-description'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 </label>
                                 <textarea id="my-textarea" class="primary_input_field" id
                                           name="meta_description" style="height: 200px"
-                                          rows="3">{{old('meta_keywords')}}</textarea>
+                                          rows="3"><?php echo e(old('meta_keywords')); ?></textarea>
                             </div>
 
                         </div>
@@ -942,7 +990,8 @@
                         <div class="d-flex justify-content-center">
                             <button class="primary-btn semi_large2  fix-gr-bg" id="save_button_parent"
                                     type="submit"><i
-                                    class="ti-check"></i> {{__('common.Add') }} {{__('courses.Course') }}
+                                    class="ti-check"></i> <?php echo e(__('common.Add')); ?> <?php echo e(__('courses.Course')); ?>
+
                             </button>
                         </div>
                     </div>
@@ -952,9 +1001,9 @@
         </div>
 
     </section>
-    @include('backend.partials.delete_modal')
-@endsection
-@push('js')
+    <?php echo $__env->make('backend.partials.delete_modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startPush('js'); ?>
     <script>
         let show_overview_media = $('#show_overview_media');
         let overview_host_section = $('#overview_host_section');
@@ -997,10 +1046,10 @@
             }
         });
     </script>
-@endpush
-@push('scripts')
+<?php $__env->stopPush(); ?>
+<?php $__env->startPush('scripts'); ?>
 
-    <script src="{{asset('/')}}/Modules/CourseSetting/Resources/assets/js/course.js"></script>
+    <script src="<?php echo e(asset('/')); ?>/Modules/CourseSetting/Resources/assets/js/course.js"></script>
 
 
 
@@ -1009,7 +1058,7 @@
 
         vdocipherList.select2({
             ajax: {
-                url: '{{route('getAllVdocipherData')}}',
+                url: '<?php echo e(route('getAllVdocipherData')); ?>',
                 type: "GET",
                 dataType: 'json',
                 delay: 250,
@@ -1027,7 +1076,7 @@
 
         $('.vimeoList').select2({
             ajax: {
-                url: '{{route('getAllVimeoData')}}',
+                url: '<?php echo e(route('getAllVimeoData')); ?>',
                 type: "GET",
                 dataType: 'json',
                 delay: 250,
@@ -1041,7 +1090,7 @@
             }
         });
     </script>
-    @if(isModuleActive('UpcomingCourse'))
+    <?php if(isModuleActive('UpcomingCourse')): ?>
         <script>
             upcomingCourseDivToggle();
 
@@ -1072,5 +1121,7 @@
 
 
         </script>
-    @endif
-@endpush
+    <?php endif; ?>
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('backend.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/admin/web/sampad.me/public_html/course/Modules/CourseSetting/Providers/../Resources/views/add_course.blade.php ENDPATH**/ ?>
