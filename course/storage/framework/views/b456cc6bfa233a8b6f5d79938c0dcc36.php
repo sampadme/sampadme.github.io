@@ -1,0 +1,2 @@
+<span><?php echo e($query->discount_price != null?getPriceFormat($query->discount_price):getPriceFormat($query->price)); ?></span>
+<?php /**PATH /home/admin/web/sampad.me/public_html/course/Modules/CourseSetting/Providers/../Resources/views/components/_course_price_td.blade.php ENDPATH**/ ?>
