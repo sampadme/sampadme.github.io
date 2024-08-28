@@ -975,7 +975,7 @@
                         </div>
                     </div>
                 </div>
-
+<!-- 
                 <div class="row">
 
                     <div class="col-xl-12">
@@ -988,7 +988,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> -->
 
                 @if(Settings('frontend_active_theme')=="edume")
                     <div class="row">
@@ -1017,7 +1017,7 @@
                         </div>
                     </div>
                 @endif
-                <div class="row">
+                <!-- <div class="row">
 
                     <div class="col-xl-12">
                         <div class="primary_input mb-25">
@@ -1030,7 +1030,7 @@
 
                     </div>
 
-                </div>
+                </div> -->
 
                 <div class="col-lg-12 text-center pt_15">
                     <div class="d-flex justify-content-center">

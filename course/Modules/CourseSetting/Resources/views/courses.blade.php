@@ -664,7 +664,7 @@
                                             </div>
                                         @endif
                                     </div>
-                                    <div class="row">
+                                    <!-- <div class="row">
 
 
                                         <div class="col-xl-12">
@@ -676,8 +676,8 @@
                                                        placeholder="-" type="text">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
+                                    </div> -->
+                                    <!-- <div class="row">
                                         <div class="col-xl-12">
                                             <div class="primary_input mb-25">
                                                 <label class="primary_input_label"
@@ -689,7 +689,7 @@
                                                           rows="3"></textarea>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-lg-12 text-center pt_15">
                                         <div class="d-flex justify-content-center">
                                             <button class="primary-btn semi_large2  fix-gr-bg"
