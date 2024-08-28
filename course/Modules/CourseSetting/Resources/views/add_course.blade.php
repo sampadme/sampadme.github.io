@@ -415,7 +415,7 @@
                         </div>
 
 
-                        <!-- <div class="col-xl-4 makeResize ">
+                        <div class="col-xl-4 makeResize ">
                             <label class="primary_input_label d-flex"
                                    for="">{{ __('courses.Level') }}<span class="required_mark">*</span>
                             </label>
@@ -430,7 +430,7 @@
                                 @endforeach
 
                             </select>
-                        </div> -->
+                        </div>
                         <div class="col-xl-4 makeResize responsiveResize" id="">
                             <label class="primary_input_label d-flex"
                                    for="">{{ __('common.Language') }}<span class="required_mark">*</span>
