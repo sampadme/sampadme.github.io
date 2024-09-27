@@ -75,19 +75,19 @@ ExpiresDefault "access plus 2 days"
 </IfModule>
 ## EXPIRES CACHING ##
 
-<Files .env>
-    Order allow,deny
-    Deny from all
-</Files>
+# <Files .env>
+#     Order allow,deny
+#     Deny from all
+# </Files>
 
-<Files .zip>
-    Order allow,deny
-    Deny from all
-</Files>
+# <Files .zip>
+#     Order allow,deny
+#     Deny from all
+# </Files>
 
 <FilesMatch "composer\.json|composer\.lock|modules_statuses\.json|package\.json|package-lock\.json|phpunit\.xml|README\.md|server\.php|webpack.mix\.js">
-  Order allow,deny
-  Deny from all
+  # Order allow,deny
+  # Deny from all
 </FilesMatch>
 
 <IfModule mod_security.c>
