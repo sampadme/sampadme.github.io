@@ -1,14 +1,262 @@
+<!-- WHY: Define the document type as HTML5 for modern web standards compliance -->
 <!DOCTYPE html>
+<!-- WHY: Root HTML element with English language attribute for accessibility and SEO -->
 <html lang="en">
+<!-- WHAT: Head section containing metadata, stylesheets, and scripts for the Sampad Howlader portfolio -->
+<!-- CONTEXT: ADMINISTRATIVE CONTEXT: This head section sets up the foundation for a responsive, accessible Vue.js single-page application -->
 <head>
+    <!-- HOW: Set character encoding to UTF-8 for proper text rendering across languages -->
     <meta charset="UTF-8">
+    <!-- HOW: Configure viewport for responsive design on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- WHAT: Page title for browser tab and search engine results -->
+    <title>Sampad Howlader - Portfolio</title>
+    <!-- WHAT: Meta description for SEO and social media sharing -->
+    <meta name="description" content="Sampad Howlader - Full Stack Developer & IT Professional. Passionate about technology, design, and development.">
+    <!-- HOW: Link to favicon for browser tab icon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.svg">
+        <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/tailwind.css">
+<script src="assets/js/vue.global.js"></script>
+    <script src="assets/js/vue-router.global.js"></script>
+    <!-- HOW: Load Tailwind CSS framework from CDN for utility-first styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- HOW: Configure Tailwind CSS with dark mode support using class-based toggling -->
+    <script>
+        // WHY: Configure Tailwind CSS to enable dark mode functionality
+        // WHAT: Tailwind configuration object for theme customization
+        // HOW: Set darkMode to 'class' to enable manual dark mode toggling via CSS classes
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+    <!-- HOW: Load Vue.js 3 framework from CDN for reactive UI components -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- HOW: Load Vue Router 4 from CDN for client-side routing -->
+    <script src="https://unpkg.com/vue-router@4/dist/vue-router.global.js"></script>
+    <!-- HOW: Load Font Awesome icons from CDN for UI elements -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- WHAT: Internal CSS styles for custom animations and visual effects -->
+    <!-- HOW: Define CSS classes for animations, hover effects, and responsive design -->
+
+    <script src="components/common/FloatingNav.js"></script>
+    <script src="components/common/Footer.js"></script>
+    <script src="components/common/Header.js"></script>
+    <script src="components/common/Navigation.js"></script>
+    <script src="components/pages/About.js"></script>
+    <script src="components/pages/Contact.js"></script>
+    <script src="components/pages/Education.js"></script>
+    <script src="components/pages/Experience.js"></script>
+    <script src="components/pages/Home.js"></script>
+    <script src="components/pages/Projects.js"></script>
+    <script src="components/pages/Skills.js"></script>
+    <style>
+        /* HOW: Define fade-in animation class for smooth content appearance */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        /* HOW: Define keyframes for fade-in animation with opacity and transform */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* HOW: Style loading spinner with border animation */
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        /* HOW: Define keyframes for spinner rotation animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
-<body>
-    <ul>
-        <a href="/"><li>Home</li></a>
-        <a href="/course"><li>Course</li></a>
-    </ul>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
+    <div id="app">
+        <!-- Navigation -->
+        <navigation></navigation>
+        <!-- Router View -->
+        <router-view></router-view>
+        <!-- Footer -->
+        <footer></footer>
+    </div>
+
+    <!-- WHAT: Vue.js components and application initialization -->
+    <!-- HOW: Define Vue components and set up the single-page application with routing -->
+    <script>
+        // /* WHAT: Import Navigation component */
+        // /* HOW: Load Navigation component JavaScript file */
+        // import Navigation from './components/common/Navigation.js';
+        // /* WHAT: Import Footer component */
+        // /* HOW: Load Footer component JavaScript file */
+        // import Footer from './components/common/Footer.js';
+        // /* WHAT: Import Home component */
+        // /* HOW: Load Home component JavaScript file */
+        // import Home from './components/pages/Home.js';
+        // /* WHAT: Import About component */
+        // /* HOW: Load About component JavaScript file */
+        // import About from './components/pages/About.js';
+        // /* WHAT: Import Skills component */
+        // /* HOW: Load Skills component JavaScript file */
+        // import Skills from './components/pages/Skills.js';
+        // /* WHAT: Import Projects component */
+        // /* HOW: Load Projects component JavaScript file */
+        // import Projects from './components/pages/Projects.js';
+        // /* WHAT: Import Experience component */
+        // /* HOW: Load Experience component JavaScript file */
+        // import Experience from './components/pages/Experience.js';
+        // /* WHAT: Import Education component */
+        // /* HOW: Load Education component JavaScript file */
+        // import Education from './components/pages/Education.js';
+        // /* WHAT: Import Contact component */
+        // /* HOW: Load Contact component JavaScript file */
+        // import Contact from './components/pages/Contact.js';
+
+        // WHY: Define application routes
+        // WHAT: Route configuration for Vue Router
+        // HOW: Array of route objects with path, name, and component mappings
+        const routes = [
+            // WHY: Home route - landing page
+            // WHAT: Root path route for home page
+            // HOW: Route object with path and component
+            {
+                path: '/',
+                name: 'Home',
+                component: Home
+            },
+            // WHY: About route - personal information
+            // WHAT: About page route
+            // HOW: Route object for about section
+            {
+                path: '/about',
+                name: 'About',
+                component: About
+            },
+            // WHY: Skills route - technical skills
+            // WHAT: Skills page route
+            // HOW: Route object for skills section
+            {
+                path: '/skills',
+                name: 'Skills',
+                component: Skills
+            },
+            // WHY: Projects route - portfolio projects
+            // WHAT: Projects page route
+            // HOW: Route object for projects section
+            {
+                path: '/projects',
+                name: 'Projects',
+                component: Projects
+            },
+            // WHY: Experience route - work experience
+            // WHAT: Experience page route
+            // HOW: Route object for experience section
+            {
+                path: '/experience',
+                name: 'Experience',
+                component: Experience
+            },
+            // WHY: Education route - academic background
+            // WHAT: Education page route
+            // HOW: Route object for education section
+            {
+                path: '/education',
+                name: 'Education',
+                component: Education
+            },
+            // WHY: Contact route - contact information
+            // WHAT: Contact page route
+            // HOW: Route object for contact section
+            {
+                path: '/contact',
+                name: 'Contact',
+                component: Contact
+            }
+        ];
+
+        // WHY: Create Vue Router instance with hash-based history
+        // WHAT: Router handles navigation and component switching
+        // HOW: Use createWebHashHistory for GitHub Pages compatibility
+        const router = VueRouter.createRouter({
+            history: VueRouter.createWebHashHistory(),
+            routes
+        });
+
+        // WHY: Initialize main Vue application instance
+        // WHAT: Root Vue app with router and global components
+        // HOW: Create app with data, computed properties, and methods for theme management
+        // CONTEXT: ADMINISTRATIVE CONTEXT: Manages global application state like dark mode
+        const app = Vue.createApp({
+            // WHAT: Reactive data for global application state
+            // HOW: Track dark mode state and persist in localStorage
+            data() {
+                return {
+                    isDarkMode: localStorage.getItem('theme') === 'dark'
+                };
+            },
+            // WHAT: Computed properties for reactive state
+            // HOW: Determine if current page is home page for navigation styling
+            computed: {
+                isHomePage() {
+                    return this.$route.path === '/';
+                }
+            },
+            // WHAT: Global methods available to all components
+            // HOW: Define functions for theme toggling and scrolling
+            methods: {
+                // WHY: Toggle between light and dark themes
+                // WHAT: Switch theme and persist preference in localStorage
+                // HOW: Update data property, save to storage, apply CSS classes
+                toggleDarkMode() {
+                    this.isDarkMode = !this.isDarkMode;
+                    localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
+                    if (this.isDarkMode) {
+                        document.documentElement.classList.add('dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                    }
+                },
+                // WHY: Provide global scroll-to-section functionality
+                // WHAT: Scroll to specific page sections smoothly
+                // HOW: Find element by ID and use scrollIntoView API
+                scrollToSection(sectionId) {
+                    const element = document.getElementById(sectionId);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            },
+            // WHY: Apply initial theme on app mount
+            // WHAT: Set up dark mode classes based on saved preference
+            // HOW: Check stored theme and apply appropriate CSS classes
+            mounted() {
+                // Apply initial theme
+                if (this.isDarkMode) {
+                    document.documentElement.classList.add('dark');
+                }
+            }
+        });
+
+        // WHY: Register global components
+        // WHAT: Make Navigation and Footer available globally
+        // HOW: Vue app.component() method
+        app.component('navigation', Navigation);
+        app.component('footer', Footer);
+
+        // WHY: Register router plugin with Vue app
+        // WHAT: Enable routing functionality in the application
+        // HOW: Use app.use() to install Vue Router
+        app.use(router);
+        // WHY: Mount Vue app to DOM element
+        // WHAT: Start the Vue application by mounting to #app element
+        // HOW: Call mount() with CSS selector to begin rendering
+        app.mount('#app');
+    </script>
 </body>
 </html>
